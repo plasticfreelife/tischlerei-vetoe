@@ -1,0 +1,50 @@
+TITLE: Projekt anfragen · Tischlerei Vetö
+DESC: Fragen Sie Ihr Möbel nach Maß bei der Tischlerei Christian Vetö in Wien an: Einbauschrank, Plattformbett, Küche, Badmöbel oder Einzelstück.
+NAV: anfrage.html
+---
+<section class="seitenkopf" aria-labelledby="titel">
+<div class="wrap seitenkopf-in">
+<h1 class="h-riesig auf" id="titel">Projekt anfragen.</h1>
+<p class="lead auf" style="--v:100ms">Erzählen Sie uns, was entstehen soll. Wir melden uns innerhalb von zwei Werktagen und vereinbaren ein Gespräch oder gleich das Aufmaß.</p>
+</div>
+</section>
+
+<section class="wrap" aria-label="Anfrageformular und Kontakt" style="padding-bottom:var(--abstand)">
+<div class="anfrage">
+<form class="anfrage-form" id="anfrage-form" action="anfrage.php" method="post" enctype="multipart/form-data">
+<div class="meldung" id="anfrage-status" role="status" hidden></div>
+<div class="feld"><label for="f-vorhaben">Was soll entstehen?</label><input id="f-vorhaben" name="vorhaben" type="text" required placeholder="z. B. Garderobe fürs Vorzimmer, Bett mit Stauraum, ein Regal für die Nische"></div>
+<div class="horst-umleitung" data-anfrage-horst hidden>
+<strong>Hochbetten baut unsere Marke Horst.</strong>
+<p>Bitte stellen Sie Ihre Anfrage für ein Hochbett direkt auf horsthochbetten.at. Dort finden Sie Modelle, Beispiele und das passende Formular.</p>
+<a class="verweis" href="https://horsthochbetten.at" rel="noopener">Zu horsthochbetten.at <span class="pfeil" aria-hidden="true">↗</span></a>
+</div>
+<div class="feld"><label for="f-masse">Maße, soweit bekannt</label><input id="f-masse" name="masse" type="text" placeholder="z. B. Nische 240 × 260 × 60 cm"></div>
+<div class="zwei">
+<div class="feld"><label for="f-ort">Bezirk oder Ort</label><input id="f-ort" name="ort" type="text" autocomplete="address-level2" placeholder="z. B. 1070 Wien"></div>
+<div class="feld"><label for="f-zeitraum">Gewünschter Zeitraum</label><select id="f-zeitraum" name="zeitraum"><option value="">Noch offen</option><option>In den nächsten 3 Monaten</option><option>In 3 bis 6 Monaten</option><option>Später als 6 Monate</option></select></div>
+</div>
+<div class="feld"><label for="f-budget">Ungefährer Rahmen (optional)</label><select id="f-budget" name="budget"><option value="">Lieber im Gespräch klären</option><option>bis 5.000 €</option><option>5.000 bis 15.000 €</option><option>15.000 bis 30.000 €</option><option>über 30.000 €</option></select></div>
+<div class="feld"><label for="f-nachricht">Ihre Nachricht</label><textarea id="f-nachricht" name="nachricht" required placeholder="Erzählen Sie frei: Was soll das Möbel können, was gefällt Ihnen, gibt es schon Skizzen, Bilder oder Pläne?"></textarea></div>
+<div class="zwei">
+<div class="feld"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+<div class="feld"><label for="f-telefon">Telefon (optional)</label><input id="f-telefon" name="telefon" type="tel" autocomplete="tel"></div>
+</div>
+<div class="feld"><label for="f-email">E-Mail</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+<div class="feld"><label for="f-dateien">Pläne, Skizzen oder Fotos (optional)</label><input id="f-dateien" name="dateien[]" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.dwg,.dxf,.docx,.xlsx" class="datei"><span class="klein">Bis zu 5 Dateien, je höchstens 10 MB: PDF, Bilder, DWG, DXF, Word oder Excel.</span></div>
+<div class="falle" aria-hidden="true"><label for="f-website">Bitte leer lassen</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+<p class="klein">Hochbetten bauen wir unter unserer Marke Horst, bitte direkt über <a href="https://horsthochbetten.at" rel="noopener">horsthochbetten.at</a> anfragen. Ihre Angaben verwenden wir nur für Ihre Anfrage, siehe <a href="datenschutz.html">Datenschutz</a>.</p>
+<div class="buehne-aktion"><button class="knopf" type="submit">Anfrage absenden</button></div>
+<div class="meldung" id="anfrage-meldung" hidden>
+<p><strong>Ihr E-Mail-Programm öffnet sich mit Ihrer Anfrage.</strong> Falls nicht, kopieren Sie den Text und senden Sie ihn an office@tischler-vetoe.at. Dateien hängen Sie bitte dort an.</p>
+<div class="feld" style="margin-top:14px"><label for="anfrage-text">Ihre Anfrage</label><textarea id="anfrage-text" readonly></textarea></div>
+<button class="knopf knopf-leise" type="button" id="anfrage-kopieren" style="margin-top:12px">Text kopieren</button>
+</div>
+</form>
+<aside class="anfrage-seite" aria-label="Kontakt">
+<div class="kontakt-zeilen"><a href="tel:+4368110340769">+43 681 103 407 69</a><a href="mailto:office@tischler-vetoe.at">office@tischler-vetoe.at</a></div>
+<div class="text"><p>Tischlerei Christian Vetö<br>Kleinhausgasse 10/2<br>1210 Wien</p><p class="klein">Termine nach Vereinbarung.</p></div>
+<figure class="foto" style="aspect-ratio:4/5"><img src="assets/img/werkstatt-christian.jpg" alt="Christian Vetö in der Werkstatt" loading="lazy" width="1350" height="1800"></figure>
+</aside>
+</div>
+</section>

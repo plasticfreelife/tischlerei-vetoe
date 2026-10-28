@@ -1,0 +1,380 @@
+/* Tischlerei Christian Vetö – gemeinsames Stylesheet
+   Layout: ein 12-Spalten-Raster mit gleichen Außenrändern; Fotos dürfen bis an den Rand,
+   Text bleibt im Raster. Flächen werden durch Tonstufen getrennt, nie durch Linien. */
+
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:400 600;font-display:swap;
+  src:url(fonts/cormorant-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:400 600;font-display:swap;
+  src:url(fonts/cormorant-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Jost";font-style:normal;font-weight:300 600;font-display:swap;
+  src:url(fonts/jost-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Jost";font-style:normal;font-weight:300 600;font-display:swap;
+  src:url(fonts/jost-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  /* Farbe: die Werkstatt im Licht.
+     Grund wie gekalkter Putz, Schrift in dunklem Nuss, das Grün aus dem Logo als Akzent und für Farbflächen,
+     der Fuß in Nuss. Eiche nur für die Textmarkierung. Horst teilt sich das Grün. */
+  --grund:#efe8dd;
+  --stein:#e2d8c8;
+  --papier:#f8f4ee;
+  --tinte:#2a211b;
+  --tinte-2:#5b4f46;
+  --nuss:#3a2a20;
+  --nuss-hell:#e6d8c4;
+  --holz:#c99a5b;
+  --gruen:#184420;
+  --gruen-dunkel:#0f3016;
+  --gruen-hell:#e3ecd9;
+  --gruen-linie:#c9d8bb;
+
+  /* Schrift: Cormorant Garamond für Überschriften (handwerklich, ruhig), Jost für Text (geometrisch wie das Logo) */
+  --display:"Cormorant Garamond","Garamond","Georgia",serif;
+  --schrift:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;
+  --t-riesig:clamp(52px,8.2vw,132px);
+  --t-gross:clamp(38px,4.8vw,72px);
+  --t-mittel:clamp(22px,1.9vw,28px);
+  --t-text:18px;
+  --t-klein:15px;
+
+  --rand:clamp(16px,3.4vw,48px);
+  --abstand:clamp(96px,12vw,200px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--grund);color:var(--tinte);font-family:var(--schrift);font-size:var(--t-text);font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,p,ol,ul,figure,blockquote,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gruen);outline-offset:3px}
+::selection{background:var(--holz);color:var(--tinte)}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.wrap{max-width:1520px;margin-inline:auto;padding-left:max(var(--rand),env(safe-area-inset-left,0px));padding-right:max(var(--rand),env(safe-area-inset-right,0px))}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px)}
+
+/* Typo */
+.h-riesig{font-family:var(--display);font-size:var(--t-riesig);font-weight:500;line-height:.92;letter-spacing:-.02em;text-wrap:balance}
+.h-gross{font-family:var(--display);font-size:var(--t-gross);font-weight:500;line-height:1;letter-spacing:-.015em;text-wrap:balance}
+.h-mittel{font-size:var(--t-mittel);font-weight:500;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+.lead{font-size:clamp(19px,1.5vw,22px);line-height:1.5;max-width:34em;text-wrap:pretty}
+.text p+p{margin-top:1em}
+.text{max-width:36em;text-wrap:pretty}
+.klein{font-size:var(--t-klein);line-height:1.5;color:var(--tinte-2)}
+.zahl{font-variant-numeric:tabular-nums}
+
+/* Knöpfe: flach, eckig */
+.knopf{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;background:var(--gruen);color:#fff;font:500 17px/1.2 var(--schrift);text-decoration:none;border:0;border-radius:0;cursor:pointer;transition:background-color .2s var(--ease),transform .15s var(--ease)}
+.knopf:hover{background:var(--gruen-dunkel);color:#fff}
+.knopf:active{transform:translateY(1px)}
+.knopf-leise{background:transparent;color:var(--tinte);box-shadow:inset 0 0 0 1.5px var(--tinte)}
+.knopf-leise:hover{background:var(--tinte);color:var(--grund)}
+.verweis{display:inline-flex;align-items:center;gap:8px;font-weight:500;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px;transition:text-underline-offset .2s var(--ease),color .2s}
+.verweis:hover{text-underline-offset:9px;text-decoration-color:var(--gruen)}
+.pfeil{display:inline-block;transition:transform .2s var(--ease)}
+a:hover .pfeil{transform:translate(2px,-2px)}
+
+/* Kopf */
+.kopf{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--grund)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--grund)}
+.kopf-in{display:flex;align-items:center;justify-content:space-between;gap:16px 32px;min-height:84px}
+.marke{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--tinte);flex:none}
+.marke-baum{width:auto;height:46px}
+.marke-text{display:flex;flex-direction:column;gap:5px}
+.marke-schrift{width:auto;height:21px}
+.marke-unter{font-size:13px;line-height:1;color:var(--tinte-2);letter-spacing:.02em}
+.navi{display:flex;align-items:center;gap:6px 30px}
+.navi a{font-size:17px;font-weight:400;text-decoration:none;padding-block:10px;background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .25s var(--ease)}
+.navi a:hover,.navi a[aria-current="page"]{background-size:100% 1.5px}
+.navi .navi-horst{display:inline-flex;align-items:center;gap:8px}
+.horst-marke{font-size:12px;font-weight:600;letter-spacing:.04em;padding:3px 7px;background:var(--gruen);color:var(--gruen-hell)}
+.navi .knopf{min-height:46px;padding:0 20px;font-size:16px;background-image:none;background-color:var(--gruen);color:#fff}
+.navi .knopf:hover{background-color:var(--gruen-dunkel);color:#fff}
+.menue-knopf{display:none;min-height:44px;padding:0 16px;background:transparent;border:0;box-shadow:inset 0 0 0 1.5px var(--tinte);font:500 16px var(--schrift);color:var(--tinte);cursor:pointer;border-radius:0}
+
+@media (max-width:980px){
+  .js .menue-knopf{display:inline-flex;align-items:center}
+  .js .navi{display:none}
+  .js .kopf.offen .navi{display:flex}
+  .navi{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:flex-start;gap:4px;padding:8px max(var(--rand),env(safe-area-inset-left,0px)) 28px;background:var(--grund)}
+  .navi a{font-size:24px;font-weight:300}
+  .navi .knopf{margin-top:12px;font-size:17px}
+  .kopf-in{position:relative;flex-wrap:wrap}
+  html:not(.js) .navi{position:static;flex-direction:row;flex-wrap:wrap;padding:0 0 12px}
+  html:not(.js) .navi a{font-size:17px}
+}
+@media (max-width:420px){.marke-unter{display:none}.marke-baum{height:40px}.marke-schrift{height:18px}}
+
+/* Abschnitte */
+.abschnitt{padding-block:var(--abstand) 0}
+.abschnitt-kopf{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:24px;align-items:end;margin-bottom:clamp(40px,5vw,72px)}
+.abschnitt-kopf h2{grid-column:1/span 7}
+.abschnitt-kopf .lead{grid-column:8/span 5}
+@media (max-width:860px){.abschnitt-kopf h2,.abschnitt-kopf .lead{grid-column:1/-1}}
+
+/* Fotos */
+.foto{margin:0;background:var(--stein);overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover}
+.bildtext{font-size:var(--t-klein);line-height:1.45;color:var(--tinte-2);margin-top:12px;max-width:34em}
+.platzhalter{display:flex;align-items:flex-end;padding:20px;background:var(--stein);color:var(--tinte-2);font-size:var(--t-klein)}
+.platzhalter span{background:var(--papier);color:var(--tinte);padding:8px 12px}
+
+/* Startseite: Bühne */
+.buehne{padding-top:clamp(28px,5vw,72px)}
+.buehne-text{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:28px;align-items:end;padding-bottom:clamp(32px,4vw,56px)}
+.buehne h1{grid-column:1/span 8}
+.buehne-rechts{grid-column:9/span 4;display:flex;flex-direction:column;gap:24px;padding-bottom:10px}
+.buehne-aktion{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.buehne-bild{aspect-ratio:16/7.4;max-height:78vh;width:100%}
+.buehne-bild img{object-position:50% 62%}
+.buehne-fuss{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;padding-top:14px}
+@media (max-width:980px){.buehne h1,.buehne-rechts{grid-column:1/-1}.buehne-bild{aspect-ratio:4/3}}
+
+/* Startseite: Leistungen als Liste mit wechselndem Bild */
+.bereiche{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);align-items:start}
+.bereiche-liste{grid-column:1/span 6;display:flex;flex-direction:column}
+.bereich{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;align-items:baseline;padding:20px clamp(12px,1.4vw,20px) 22px;margin-inline:calc(-1 * clamp(12px,1.4vw,20px));text-decoration:none;transition:background-color .25s var(--ease)}
+.bereich:nth-child(odd){background:transparent}
+.bereich:hover,.bereich:focus-visible,.bereich.aktiv{background:var(--stein)}
+.bereich-name{font-family:var(--display);font-size:clamp(32px,3.3vw,50px);font-weight:500;line-height:1.05;letter-spacing:-.01em}
+.bereich-zeile{grid-column:1/-1;font-size:16px;color:var(--tinte-2);max-width:36em}
+.bereich .pfeil{font-size:24px}
+.bereiche-bild{grid-column:8/span 5;position:sticky;top:120px;aspect-ratio:4/5}
+.bereiche-bild img{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--ease)}
+.bereiche-bild img.sichtbar{opacity:1}
+.bereiche-bild .platzhalter{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--ease)}
+.bereiche-bild .platzhalter.sichtbar{opacity:1}
+.bereiche-bild figcaption{position:absolute;left:16px;bottom:16px;background:var(--papier);padding:8px 12px;font-size:var(--t-klein)}
+@media (max-width:860px){.bereiche-liste{grid-column:1/-1}.bereiche-bild{display:none}}
+
+/* Projekt im Fokus */
+.fokus{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px;align-items:start}
+.fokus-gross{grid-column:1/span 7;aspect-ratio:1689/1234}
+.fokus-seite{grid-column:9/span 4;display:flex;flex-direction:column;gap:28px}
+.fokus-klein{aspect-ratio:4/5;width:78%}
+@media (max-width:860px){.fokus-gross,.fokus-seite{grid-column:1/-1}.fokus-klein{width:70%}}
+
+/* Details: drei Formate */
+.details{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px;align-items:start}
+.detail-a{grid-column:1/span 4;margin-top:clamp(0px,6vw,96px)}
+.detail-a .foto{aspect-ratio:4/5}
+.detail-b{grid-column:6/span 7}
+.detail-b .foto{aspect-ratio:16/9}
+.detail-c{grid-column:6/span 6}
+.detail-c .foto{aspect-ratio:4/5}
+.detail-text{grid-column:1/span 4;align-self:center;display:flex;flex-direction:column;gap:24px}
+@media (max-width:860px){.detail-a,.detail-b,.detail-c,.detail-text{grid-column:1/-1;margin-top:0}}
+
+/* Ihr Maß – Skizze */
+.mass-feld{background:var(--stein);padding-block:clamp(72px,9vw,140px)}
+.mass{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px;align-items:start}
+.mass-form{grid-column:1/span 5;display:flex;flex-direction:column;gap:28px}
+.mass-bild{grid-column:7/span 6;background:var(--papier);padding:clamp(16px,2.4vw,36px);position:sticky;top:110px}
+.mass-bild svg{display:block;width:100%;height:auto}
+.mass-hinweis{margin-top:14px}
+@media (max-width:980px){.mass-form,.mass-bild{grid-column:1/-1;position:static}}
+
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;font-size:var(--t-klein);font-weight:500;margin-bottom:12px;color:var(--tinte)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;background:var(--papier);font-size:16px;transition:background-color .2s,color .2s}
+.chip input:hover+span{background:var(--gruen-hell)}
+.chip input:checked+span{background:var(--tinte);color:var(--grund)}
+.chip input:focus-visible+span{outline:3px solid var(--gruen);outline-offset:2px}
+.holz-punkt{width:14px;height:14px;border-radius:50%;flex:none}
+.masse{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.feld{display:flex;flex-direction:column;gap:8px;min-width:0}
+.feld label{font-size:var(--t-klein);font-weight:500}
+.feld input,.feld select,.feld textarea{width:100%;min-height:52px;padding:12px 14px;background:var(--papier);color:var(--tinte);border:0;border-radius:0;box-shadow:inset 0 -2px 0 var(--tinte-2);font:400 17px/1.4 var(--schrift)}
+.feld input:focus,.feld select:focus,.feld textarea:focus{box-shadow:inset 0 -2px 0 var(--gruen)}
+.feld textarea{min-height:160px;resize:vertical}
+.feld-einheit{position:relative}
+.feld-einheit input{padding-right:46px}
+.feld-einheit::after{content:"cm";position:absolute;right:14px;bottom:15px;font-size:15px;color:var(--tinte-2);pointer-events:none}
+.horst-umleitung{background:var(--gruen);color:var(--gruen-hell);padding:24px;display:flex;flex-direction:column;gap:14px}
+.horst-umleitung strong{color:#fff;font-weight:500;font-size:20px}
+.horst-umleitung a{color:#fff}
+
+/* Startseite: Bühne mit hochformatigem Bild */
+.buehne-raster{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:32px;align-items:end}
+.buehne-links{grid-column:1/span 6;display:flex;flex-direction:column;gap:32px;padding-bottom:clamp(0px,2vw,24px)}
+.buehne-hoch{grid-column:7/span 6;aspect-ratio:4/5;max-height:86vh;width:100%}
+.buehne-hoch img{object-position:50% 55%}
+@media (max-width:860px){.buehne-links,.buehne-hoch{grid-column:1/-1}.buehne-hoch{aspect-ratio:4/5;max-height:none}}
+
+/* Kanten und Ecken */
+.kanten-liste{display:flex;flex-wrap:wrap;gap:10px 10px;margin-top:8px}
+.kanten-liste li{background:var(--gruen-hell);color:var(--gruen);padding:8px 14px;font-size:16px}
+
+/* Idee mitbringen */
+.idee{background:var(--gruen);color:var(--gruen-hell);margin-top:var(--abstand);padding-block:clamp(72px,9vw,140px)}
+.idee h2{color:var(--papier)}
+.idee .klein{color:var(--gruen-hell)}
+.idee .knopf{background:var(--gruen-hell);color:var(--gruen)}
+.idee .knopf:hover{background:#fff;color:var(--gruen)}
+.idee-wege{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px clamp(16px,2vw,32px);margin-bottom:clamp(40px,5vw,64px)}
+.idee-weg{display:flex;flex-direction:column;gap:12px}
+.idee-weg h3{font-family:var(--display);font-size:clamp(28px,2.4vw,36px);font-weight:500;color:var(--papier);line-height:1.2;letter-spacing:-.01em;padding-top:20px;background:linear-gradient(var(--gruen-linie),var(--gruen-linie)) 0 0/48px 3px no-repeat}
+.idee-weg p{color:var(--gruen-hell)}
+@media (max-width:860px){.idee-wege{grid-template-columns:minmax(0,1fr)}}
+
+/* Team */
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px clamp(16px,2vw,32px)}
+.person-karte{display:flex;flex-direction:column;gap:14px}
+.person-karte .foto,.person-karte .platzhalter{aspect-ratio:4/5}
+.person-karte h3{font-family:var(--display);font-size:clamp(28px,2.4vw,36px);font-weight:500;line-height:1.2;letter-spacing:-.01em}
+.person-karte .rolle{font-size:var(--t-klein);color:var(--gruen);font-weight:500}
+@media (max-width:860px){.team{grid-template-columns:minmax(0,1fr)}.person-karte{max-width:480px}}
+
+/* Werkstatt-Teaser */
+.person{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px;align-items:center}
+.person-bild{grid-column:1/span 5;aspect-ratio:3/4}
+.person-text{grid-column:7/span 6;display:flex;flex-direction:column;gap:28px}
+.zitat{font-family:var(--display);font-size:clamp(28px,2.6vw,40px);font-weight:500;font-style:normal;line-height:1.2;letter-spacing:-.005em;max-width:22em}
+.zitat footer{margin-top:14px;font-size:var(--t-klein);font-weight:500;letter-spacing:0;color:var(--tinte-2)}
+@media (max-width:860px){.person-bild,.person-text{grid-column:1/-1}.person-bild{max-width:520px}}
+
+/* Horst – eigenes Farbfeld */
+.horst{background:var(--gruen);color:var(--gruen-hell);margin-top:var(--abstand)}
+.horst-in{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:40px;align-items:center;padding-block:clamp(72px,9vw,140px)}
+.horst-text{grid-column:1/span 6;display:flex;flex-direction:column;gap:28px}
+.horst-text h2{color:#fff}
+.horst-text .lead{color:var(--gruen-hell)}
+.horst-logo{width:150px;height:auto}
+.horst-bild{grid-column:8/span 5;aspect-ratio:3/4;background:#1a2618}
+.horst .knopf{background:var(--gruen-hell);color:var(--gruen)}
+.horst .knopf:hover{background:#fff}
+.horst-adresse{font-size:var(--t-klein);color:var(--gruen-hell)}
+@media (max-width:860px){.horst-text,.horst-bild{grid-column:1/-1}.horst-bild{max-width:520px}}
+
+/* Ablauf */
+.ablauf{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:40px clamp(16px,2vw,32px);counter-reset:none}
+.schritt{display:flex;flex-direction:column;gap:12px;padding-top:24px;background:linear-gradient(var(--tinte),var(--tinte)) 0 0/36px 3px no-repeat}
+.schritt h3{font-size:var(--t-mittel);font-weight:500;line-height:1.2;letter-spacing:-.01em}
+.schritt p{font-size:16px;color:var(--tinte-2)}
+@media (max-width:1100px){.ablauf{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ablauf{grid-template-columns:minmax(0,1fr)}}
+
+/* Abschluss */
+.schluss{padding-block:var(--abstand)}
+.schluss-in{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:32px;align-items:end}
+.schluss h2{grid-column:1/span 8}
+.schluss-rechts{grid-column:9/span 4;display:flex;flex-direction:column;gap:20px}
+.kontakt-zeilen{display:flex;flex-direction:column;gap:4px;font-size:20px}
+.kontakt-zeilen a{text-decoration:none}
+.kontakt-zeilen a:hover{color:var(--gruen)}
+@media (max-width:860px){.schluss h2,.schluss-rechts{grid-column:1/-1}}
+
+/* Fuß */
+.fuss{background:var(--nuss);color:var(--nuss-hell);padding-top:clamp(72px,8vw,120px);padding-bottom:max(32px,env(safe-area-inset-bottom,0px))}
+.fuss a{color:#fff;text-decoration:none}
+.fuss a:hover{color:var(--gruen-linie)}
+.fuss .fuss-name{padding-bottom:clamp(56px,6vw,88px)}
+.fuss-name{display:flex;align-items:center;gap:clamp(16px,2vw,28px);padding-bottom:clamp(56px,6vw,88px)}
+.fuss-name img.baum{height:clamp(64px,8vw,120px);width:auto}
+.fuss-name img.schrift{height:auto;width:clamp(200px,52vw,700px);min-width:0;flex:0 1 auto}
+.fuss-spalten{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;padding-bottom:56px}
+.fuss-spalte{display:flex;flex-direction:column;gap:10px;font-size:16px}
+.fuss-spalte h2{font-size:16px;font-weight:500;color:#fff}
+.fuss-unten{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;padding-top:24px;font-size:14px;color:#c4b3a0}
+.fuss-unten nav{display:flex;flex-wrap:wrap;gap:8px 24px}
+.fuss .horst-zeile{display:flex;flex-direction:column;gap:12px}
+
+/* Unterseiten */
+.seitenkopf{padding-top:clamp(40px,6vw,96px);padding-bottom:clamp(40px,5vw,72px)}
+.seitenkopf-in{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:24px;align-items:end}
+.seitenkopf h1{grid-column:1/span 8}
+.seitenkopf .lead{grid-column:9/span 4}
+@media (max-width:980px){.seitenkopf h1,.seitenkopf .lead{grid-column:1/-1}}
+
+.leistung{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:32px;align-items:center;padding-top:var(--abstand)}
+.leistung:first-of-type{padding-top:clamp(24px,3vw,48px)}
+.leistung-bild{grid-column:1/span 6;aspect-ratio:4/5}
+.leistung-bild.quer{aspect-ratio:4/3}
+.leistung-text{grid-column:8/span 5;display:flex;flex-direction:column;gap:22px}
+.leistung.gespiegelt .leistung-bild{grid-column:7/span 6;order:2}
+.leistung.gespiegelt .leistung-text{grid-column:1/span 5;order:1}
+.punkte{display:flex;flex-direction:column;gap:8px}
+.punkte li{padding-left:22px;background:linear-gradient(var(--gruen),var(--gruen)) 0 .68em/10px 3px no-repeat}
+@media (max-width:860px){.leistung-bild,.leistung-text,.leistung.gespiegelt .leistung-bild,.leistung.gespiegelt .leistung-text{grid-column:1/-1;order:0}}
+
+.band{background:var(--stein);margin-top:var(--abstand);padding-block:clamp(64px,8vw,120px)}
+.band-in{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:32px;align-items:start}
+.band-in h2{grid-column:1/span 5}
+.band-in .text,.band-in .band-rechts{grid-column:7/span 6}
+.band-rechts{display:flex;flex-direction:column;gap:24px}
+@media (max-width:860px){.band-in h2,.band-in .text,.band-in .band-rechts{grid-column:1/-1}}
+
+/* Projekte */
+.projekt{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:20px;padding-top:var(--abstand)}
+.projekt:first-of-type{padding-top:clamp(24px,3vw,48px)}
+.projekt-kopf{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:12px;align-items:end;margin-bottom:16px}
+.projekt-kopf h2{grid-column:1/span 6}
+.projekt-kopf p{grid-column:8/span 5}
+.p-voll{grid-column:1/-1;aspect-ratio:16/8}
+.p-gross{grid-column:1/span 8;aspect-ratio:4/3}
+.p-schmal{grid-column:9/span 4;aspect-ratio:3/4;align-self:end}
+.p-hoch{grid-column:1/span 5;aspect-ratio:4/5}
+.p-quer{grid-column:6/span 7;aspect-ratio:4/3;align-self:end}
+.p-mitte{grid-column:3/span 8;aspect-ratio:16/9}
+.p-links{grid-column:1/span 6;aspect-ratio:4/5}
+.p-rechts{grid-column:7/span 6;aspect-ratio:4/5}
+@media (max-width:860px){.projekt-kopf h2,.projekt-kopf p{grid-column:1/-1}.p-voll,.p-gross,.p-schmal,.p-hoch,.p-quer,.p-mitte,.p-links,.p-rechts{grid-column:1/-1}.p-voll{aspect-ratio:4/3}}
+
+/* Werkstatt */
+.lebenslauf{display:flex;flex-direction:column}
+.lebenslauf li{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:6px 32px;padding-block:22px}
+.lebenslauf li:nth-child(odd){background:transparent}
+.lebenslauf .jahr{font-family:var(--display);font-size:clamp(28px,2.4vw,36px);font-weight:500;font-variant-numeric:tabular-nums;color:var(--gruen)}
+.lebenslauf h3{font-size:20px;font-weight:500;line-height:1.3}
+.lebenslauf p{color:var(--tinte-2);max-width:40em}
+@media (max-width:640px){.lebenslauf li{grid-template-columns:minmax(0,1fr)}}
+.siegel{width:112px;height:auto}
+.werte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px clamp(16px,2vw,32px)}
+.wert{display:flex;flex-direction:column;gap:12px}
+@media (max-width:860px){.werte{grid-template-columns:minmax(0,1fr)}}
+
+/* Anfrage */
+.anfrage{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:48px;align-items:start}
+.anfrage-form{grid-column:1/span 7;display:flex;flex-direction:column;gap:28px}
+.anfrage-seite{grid-column:9/span 4;display:flex;flex-direction:column;gap:36px;position:sticky;top:110px}
+.zwei{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.meldung{background:var(--gruen-hell);color:var(--tinte);padding:20px 22px}
+@media (max-width:980px){.anfrage-form,.anfrage-seite{grid-column:1/-1;position:static}}
+@media (max-width:560px){.zwei,.masse{grid-template-columns:minmax(0,1fr)}}
+
+/* Rechtstexte */
+.recht{max-width:46em;display:flex;flex-direction:column;gap:18px;padding-bottom:var(--abstand)}
+.recht h2{font-size:var(--t-mittel);font-weight:500;margin-top:24px}
+.recht dl{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:8px 24px}
+.recht dt{font-weight:500}
+@media (max-width:640px){.recht dl{grid-template-columns:minmax(0,1fr)}.recht dd{margin-bottom:10px}}
+
+/* Bewegung: Inhalte sind ohne Skript sichtbar; das Skript spielt nur den Auftritt ab */
+@keyframes auftritt{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes bildauftritt{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+.js .auf.los{animation:auftritt .8s var(--ease) both;animation-delay:var(--v,0ms)}
+.js .foto.auf.los img{animation:bildauftritt 1.2s var(--ease) both;animation-delay:var(--v,0ms)}
+.buehne-bild img{transform-origin:50% 60%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .auf.los,.js .foto.auf.los img{animation:none}
+  *{transition-duration:.01ms!important}
+}
+.team.team-zwei{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}
+@media (max-width:860px){.team.team-zwei{grid-template-columns:minmax(0,1fr)}}
+.falle{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.feld input.datei{min-height:auto;padding:14px;font-size:16px;box-shadow:inset 0 0 0 1.5px var(--stein);background:var(--papier)}
+.feld input.datei::file-selector-button{font:500 15px var(--schrift);background:var(--gruen);color:#fff;border:0;border-radius:0;padding:10px 16px;margin-right:14px;cursor:pointer}
+.meldung.fehler{background:#f3dcd6;color:#5c1d12}
